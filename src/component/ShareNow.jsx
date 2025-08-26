@@ -1,6 +1,6 @@
 // src/components/ShareNow.jsx
 import React, { useState } from "react";
-import "./ShareNow.css";
+import "../css/ShareNow.css"; // ✅ Assumes ShareNow.css is in same folder
 
 const ShareNow = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,11 +17,10 @@ const ShareNow = () => {
       const url = `https://wa.me/?text=${encodeURIComponent(body)}`;
       window.open(url, "_blank");
     } else if (platform === "gmail") {
-      const mailto = `mailto:?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
+      const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.open(mailto, "_blank");
     }
+    handleClose(); // Close modal after sharing
   };
 
   return (

@@ -1,4 +1,4 @@
-/* src/components/DonateNow.css */
+/* src/css/DonateNow.css */
 
 .modal-overlay {
   position: fixed;
@@ -11,7 +11,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
@@ -41,15 +40,36 @@
   margin-top: 0;
   color: #004a2d;
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
-.modal-content input {
+.modal-content p {
+  color: #555;
+  font-size: 14px;
+  margin: 8px 0 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #004a2d;
+  box-shadow: 0 0 0 2px rgba(0, 74, 45, 0.2);
+  background-color: white;
 }
 
 .paystack-btn {
@@ -63,11 +83,13 @@
   cursor: pointer;
   margin: 10px 5px;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .paystack-btn:hover {
   background-color: #f59e0b;
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cancel-btn {
@@ -84,15 +106,7 @@
 
 .cancel-btn:hover {
   background: #f0f0f0;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  transform: translateY(-2px);
 }
 
 @keyframes scaleIn {

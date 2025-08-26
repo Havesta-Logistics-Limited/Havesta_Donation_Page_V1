@@ -1,7 +1,6 @@
 // src/components/DonateNow.jsx
 import React, { useState } from "react";
-import { PaystackButton } from "react-paystack";
-import "./DonateNow.css";
+import "../css/DonateNow.css";
 
 const DonateNow = () => {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +9,7 @@ const DonateNow = () => {
     email: "",
     amount: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,22 +19,63 @@ const DonateNow = () => {
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
-  const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
+  const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 
-  const componentProps = {
-    email: formData.email,
-    amount: parseInt(formData.amount) * 100 || 0,
-    publicKey,
-    text: "Proceed to Payment",
-    onSuccess: (reference) => {
-      alert(`Thank you, ${formData.name}! Your donation of ₦${formData.amount} was successful.`);
-      setShowModal(false);
-      setFormData({ name: "", email: "", amount: "" });
-    },
-    onClose: () => {
-      console.log("Payment closed");
-    },
-    currency: "NGN",
+  const handlePayment = async () => {
+    const { name, email, amount } = formData;
+    if (!name || !email || !amount) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (!publicKey) {
+      alert("Public key missing! Check .env file.");
+      return;
+    }
+
+    setLoading(true);
+
+    // Create script
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/checkout.js"; // ✅ Fixed URL
+    script.async = true;
+
+    script.onload = () => {
+      console.log("Script loaded. window.PaystackPop =", window.PaystackPop);
+
+      if (window.PaystackPop) {
+        const handler = window.PaystackPop.setup({
+          key: publicKey,
+          email,
+          amount: parseInt(amount) * 100,
+          currency: "NGN",
+          ref: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          onClose: () => {
+            alert("Payment window closed");
+            setLoading(false);
+          },
+          callback: (response) => {
+            alert(`🎉 Success! Payment ${response.reference} was successful.`);
+            setShowModal(false);
+            setFormData({ name: "", email: "", amount: "" });
+            setLoading(false);
+          },
+        });
+        handler.openIframe();
+      } else {
+        console.error("❌ window.PaystackPop is NOT defined");
+        alert("Paystack failed to initialize. Script loaded but PaystackPop is missing.");
+        setLoading(false);
+      }
+    };
+
+    script.onerror = () => {
+      console.error("❌ Failed to load Paystack script");
+      alert("Failed to load payment system. Check internet or ad blocker.");
+      setLoading(false);
+    };
+
+    document.body.appendChild(script);
   };
 
   return (
@@ -48,11 +89,9 @@ const DonateNow = () => {
       {showModal && (
         <div className="modal-overlay" onClick={handleClose}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleClose}>
-              &times;
-            </button>
+            <button className="modal-close" onClick={handleClose}>&times;</button>
             <h2>Make a Donation</h2>
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               <input
                 type="text"
                 name="name"
@@ -77,7 +116,14 @@ const DonateNow = () => {
                 onChange={handleInputChange}
                 required
               />
-              <PaystackButton {...componentProps} className="paystack-btn" />
+              <button
+                type="button"
+                className="paystack-btn"
+                onClick={handlePayment}
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Proceed to Payment"}
+              </button>
               <button type="button" className="cancel-btn" onClick={handleClose}>
                 Cancel
               </button>

@@ -10,6 +10,8 @@ import chickenWings from "../assets/chicken.svg";
 import sweetBeans from "../assets/beans.svg";
 import titusFish from "../assets/fish.svg";
 import plantain from "../assets/plantain.svg";
+import ShareNow from "../component/ShareNow"
+import DonateNow from "../component/DonateNow";
 
 const Maincontent = () => {
   return (
@@ -28,21 +30,11 @@ const Maincontent = () => {
         </p>
       </div>
 
-      {/* CTA Buttons */}
+        {/* CTA Buttons */}
       <div className="cta-buttons">
-        <button
-          className="cta-button donate-btn"
-          onClick={() => document.getElementById("donate-modal").style.display = "block"}
-        >
-          Donate Now
-        </button>
-        <button
-          className="cta-button share-btn"
-          onClick={() => document.getElementById("share-modal").style.display = "block"}
-        >
-          Share To Others
-        </button>
-      </div>
+       <DonateNow />
+   <ShareNow />
+</div>
 
       {/* Products Grid */}
      <div className="products-grid">
@@ -87,9 +79,10 @@ const Maincontent = () => {
     <img src={plantain} alt="Plantain" />
     <span className="product-label label-plantain">Plantain</span>
   </div>
-</div>
+        </div>
       </div>
   );
 };
+
 
 export default Maincontent;
