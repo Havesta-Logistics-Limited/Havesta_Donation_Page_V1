@@ -10,7 +10,7 @@
   --yellow:#FFC141;
   --lightgreen:#DFFFCB;
 }
-.greebg{
+.greenbg{
   background: var(--primary);
 }
 .yellowbg{
