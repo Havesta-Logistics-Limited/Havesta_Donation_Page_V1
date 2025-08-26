@@ -9,7 +9,13 @@ import rectangle4 from "../assets/Rectangle4.svg";
 import rectangle5 from "../assets/Rectangle5.svg";
 import rectangle6 from "../assets/Rectangle6.svg";
 import heart from "../assets/heart.svg";
-import star from "../assets/star.svg";
+
+import greenheart from "../assets/greenheart.png";
+import pray from "../assets/pray.png";
+import flower from "../assets/flower.png";
+import clap from "../assets/clap.png";
+import star from "../assets/star.png";
+import like from "../assets/like.svg";
 import whatsapp from "../assets/whatsapp.svg";
 import { FaPlay } from "react-icons/fa";
 
@@ -228,7 +234,15 @@ const Donation = () => {
               {isExpanded ? "Read Less" : "Read More"}
             </p>
 
-            <div className="like"></div>
+            <div className="like flex items-center mt-3 gap-1">
+              <img src={like} alt="" className="mr-2 cursor-pointer" />
+              <img src={greenheart} alt="" />
+              <img src={pray} alt="" />
+              <img src={flower} alt="" />
+              <img src={clap} alt="" />
+              <img src={star} alt="" />
+              <p className="underline">85</p>
+            </div>
           </div>
         </div>
 
