@@ -31,7 +31,7 @@ const MainPage = () => {
             validation.
           </p>
 
-          <div className="flex justify-center gap-3 lg:justify-start">
+          <div className="flex justify-center gap-3 mt-12 lg:justify-start">
             <div className="w-36">
               <DonateNow />
             </div>

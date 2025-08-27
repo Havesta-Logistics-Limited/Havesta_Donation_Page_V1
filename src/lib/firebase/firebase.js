@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs
+// firebase.js
 import { initializeApp } from "firebase/app";
 import {
   getDatabase,
@@ -22,111 +22,48 @@ const firebaseConfig = {
   measurementId: "G-CJN2EPN8LH",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 
-// Save donation to Realtime DB
-export async function saveDonation(donorData) {
-  try {
-    const donationsRef = ref(db, "donations");
-    const newDonationRef = push(donationsRef);
+// Save donation
+export const saveDonation = async (donationData) => {
+  const donationsRef = ref(db, "donations");
+  const newDonationRef = push(donationsRef);
+  await set(newDonationRef, {
+    ...donationData,
+    createdAt: Date.now(),
+  });
+};
 
-    await set(newDonationRef, {
-      name: donorData.name,
-      email: donorData.email,
-      amount: donorData.amount,
-      reference: donorData.reference,
-      status: donorData.status || "completed",
-      paymentMethod: "paystack",
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    });
+// Get *all* donations (array)
+export const getDonations = async () => {
+  const donationsRef = ref(db, "donations");
+  const snapshot = await get(donationsRef);
 
-    console.log("✅ Donation saved with ID:", newDonationRef.key);
-    return { success: true, id: newDonationRef.key };
-  } catch (error) {
-    console.error("❌ Error saving donation:", error);
-    return { success: false, error: error.message };
-  }
-}
+  if (!snapshot.exists()) return [];
 
-// Get all donations (for admin)
-export async function getAllDonations() {
-  try {
-    const snapshot = await get(ref(db, "donations"));
-    if (!snapshot.exists()) return { success: true, donations: [] };
+  return Object.entries(snapshot.val()).map(([id, data]) => ({
+    id,
+    ...data,
+  }));
+};
 
-    const data = snapshot.val();
-    const donations = Object.entries(data).map(([id, donation]) => ({
+// Get *recent* donations (array)
+export const getRecentDonations = async (limitCount = 5) => {
+  const donationsRef = ref(db, "donations");
+  const donationsQuery = query(
+    donationsRef,
+    orderByChild("createdAt"),
+    limitToLast(limitCount)
+  );
+
+  const snapshot = await get(donationsQuery);
+  if (!snapshot.exists()) return [];
+
+  return Object.entries(snapshot.val())
+    .map(([id, data]) => ({
       id,
-      ...donation,
-    }));
-
-    // Sort by createdAt descending
-    donations.sort((a, b) => b.createdAt - a.createdAt);
-
-    return { success: true, donations };
-  } catch (error) {
-    console.error("❌ Error fetching donations:", error);
-    return { success: false, error: error.message };
-  }
-}
-
-// Get recent donations (public display)
-export async function getRecentDonations(limitCount = 10) {
-  try {
-    const donationsRef = query(
-      ref(db, "donations"),
-      orderByChild("createdAt"),
-      limitToLast(limitCount)
-    );
-
-    const snapshot = await get(donationsRef);
-    if (!snapshot.exists()) return { success: true, donations: [] };
-
-    const data = snapshot.val();
-    const donations = Object.entries(data).map(([id, donation]) => ({
-      id,
-      name: donation.name || "Anonymous",
-      amount: donation.amount,
-      createdAt: donation.createdAt,
-    }));
-
-    // Sort latest first
-    donations.sort((a, b) => b.createdAt - a.createdAt);
-
-    return { success: true, donations };
-  } catch (error) {
-    console.error("❌ Error fetching recent donations:", error);
-    return { success: false, error: error.message };
-  }
-}
-
-// Calculate total donations
-export async function getTotalDonations() {
-  try {
-    const snapshot = await get(ref(db, "donations"));
-    if (!snapshot.exists()) return { success: true, total: 0, count: 0 };
-
-    const data = snapshot.val();
-
-    let total = 0;
-    let count = 0;
-
-    Object.values(data).forEach((donation) => {
-      total += parseInt(donation.amount) || 0;
-      count++;
-    });
-
-    return {
-      success: true,
-      total,
-      count,
-      formatted: total.toLocaleString(),
-    };
-  } catch (error) {
-    console.error("❌ Error calculating total donations:", error);
-    return { success: false, error: error.message };
-  }
-}
+      ...data,
+    }))
+    .sort((a, b) => b.createdAt - a.createdAt);
+};
