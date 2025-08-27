@@ -64,7 +64,9 @@ const DonateNow = () => {
         handler.openIframe();
       } else {
         console.error("❌ window.PaystackPop is NOT defined");
-        alert("Paystack failed to initialize. Script loaded but PaystackPop is missing.");
+        alert(
+          "Paystack failed to initialize. Script loaded but PaystackPop is missing."
+        );
         setLoading(false);
       }
     };
@@ -81,7 +83,10 @@ const DonateNow = () => {
   return (
     <>
       {/* Trigger Button */}
-      <button className="cta-button donate-btn" onClick={handleOpen}>
+      <button
+        className="w-full cursor-pointer text-center rounded-3xl  textgreen yellowbg font-bold py-4 px-2 "
+        onClick={handleOpen}
+      >
         Donate Now
       </button>
 
@@ -89,7 +94,9 @@ const DonateNow = () => {
       {showModal && (
         <div className="modal-overlay" onClick={handleClose}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleClose}>&times;</button>
+            <button className="modal-close" onClick={handleClose}>
+              &times;
+            </button>
             <h2>Make a Donation</h2>
             <form onSubmit={(e) => e.preventDefault()}>
               <input
@@ -123,9 +130,6 @@ const DonateNow = () => {
                 disabled={loading}
               >
                 {loading ? "Loading..." : "Proceed to Payment"}
-              </button>
-              <button type="button" className="cancel-btn" onClick={handleClose}>
-                Cancel
               </button>
             </form>
           </div>

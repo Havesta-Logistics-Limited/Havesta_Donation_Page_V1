@@ -10,14 +10,12 @@ import rectangle5 from "../assets/Rectangle5.svg";
 import rectangle6 from "../assets/Rectangle6.svg";
 import heart from "../assets/heart.svg";
 
-import greenheart from "../assets/greenheart.png";
-import pray from "../assets/pray.png";
-import flower from "../assets/flower.png";
-import clap from "../assets/clap.png";
 import star from "../assets/star.png";
 import like from "../assets/like.svg";
 import whatsapp from "../assets/whatsapp.svg";
 import { FaPlay } from "react-icons/fa";
+import DonateNow from "./DonateNow";
+import "./../css/Maincontent.css";
 
 const Donation = () => {
   const videoRef = useRef(null);
@@ -94,7 +92,23 @@ const Donation = () => {
       amount: "900,000",
       time: "4 d",
     },
+    {
+      id: 5,
+      name: "John Amobeda",
+      amount: "900,000",
+      time: "4 d",
+    },
   ];
+
+  let numberofdonators = donators.length;
+
+  const totalAmountRaised = donators.reduce((acc, item) => {
+    // Remove commas and any non-numeric characters
+    const num = Number(String(item.amount).replace(/,/g, ""));
+    return acc + (isNaN(num) ? 0 : num);
+  }, 0);
+
+  const percentageraised = totalAmountRaised / 10000000;
 
   // sharenow button
   const handleShare = () => {
@@ -151,7 +165,7 @@ const Donation = () => {
             )}
           </div>
           <div
-            className="lightgreenbg textgreen font-bold rounded-3xl py-3  flex  items-center justify-center text-center  gap-2 w-[70%] px-2 m-auto mt-4 cursor-pointer sm:text-sm lg:w-[100%]"
+            className="lightgreenbg text-[#273f2b] font-bold rounded-3xl py-5  flex  items-center justify-center text-center  gap-2 w-[80%] px-2 m-auto mt-4 cursor-pointer sm:text-sm lg:w-[80%]"
             onClick={speakClick}
           >
             <img src={whatsapp} alt="" className="w-7 sm:w-6" />
@@ -172,14 +186,12 @@ const Donation = () => {
           </div>
           {/* donate and download */}
           <div className="w-full flex flex-col gap-3 mt-3 sm:mt-1 sm:gap-2 ">
-            <div className="block cursor-pointer text-center rounded-2xl textgreen yellowbg font-bold py-3 px-2 ">
-              Donate now
-            </div>
+            <DonateNow />
             <div className="w-full">
               <a
                 href={pitch}
                 download="Pitch Deck - Havesta"
-                className="block cursor-pointer text-center rounded-2xl text-white greenbg font-bold py-3 px-2 "
+                className="block cursor-pointer text-center rounded-3xl text-white greenbg font-bold py-4 px-2 "
               >
                 Download Pitch
               </a>
@@ -211,20 +223,27 @@ const Donation = () => {
               </span>
               . For me, this isn’t just a business;
               <span className="font-bold text-[#02A95C] ">
+                {" "}
                 it’s a mission to empower local farmers, make fresh and healthy
                 food easily accessible, and create a sustainable supply chain
                 that benefits everyone involved
               </span>
-              . The agricultural sector in Nigeria has enormous untapped
-              potential, and{" "}
-              <span className="font-bold">
-                {" "}
-                Havesta is our way of unlocking it through technology,
-                logistics, and trust
+              .{" "}
+              <span className="block mt-1">
+                The agricultural sector in Nigeria has enormous untapped
+                potential, and{" "}
+                <span className="font-bold">
+                  {" "}
+                  Havesta is our way of unlocking it through technology,
+                  logistics, and trust
+                </span>
+                . Ultimately, building Havesta is about solving a real problem
+                that affects millions, while creating lasting economic and
+                social impact.{" "}
+                <span className="font-bold block mt-1">
+                  Download the Pitch to get more information.
+                </span>
               </span>
-              . Ultimately, building Havesta is about solving a real problem
-              that affects millions, while creating lasting economic and social
-              impact.
             </p>
 
             <p
@@ -236,11 +255,11 @@ const Donation = () => {
 
             <div className="like flex items-center mt-3 gap-1">
               <img src={like} alt="" className="mr-2 cursor-pointer" />
-              <img src={greenheart} alt="" />
-              <img src={pray} alt="" />
-              <img src={flower} alt="" />
-              <img src={clap} alt="" />
-              <img src={star} alt="" />
+              <p>💚</p>
+              <p>🙏</p>
+              <p>💐</p>
+              <p>👏</p>
+              <p>✨</p>
               <p className="underline">85</p>
             </div>
           </div>
@@ -254,13 +273,13 @@ const Donation = () => {
               <div className=" w-[200px] flex flex-col gap-1 lg:w-[180px]">
                 <h1 className="text-[#232323] font-bold text-xl flex justify-between sm:text-lg">
                   {" "}
-                  ₦1,856,717
+                  ₦{totalAmountRaised}
                   <span className="font-normal pr-4">raised</span>
                 </h1>
                 <div className="font-bold flex justify-between items-center text-sm sm:text-xs">
                   <p className="textgreen">₦10M Goal</p>
                   <p className="text-[#6F6F6F] -mt-1">.</p>
-                  <p className="text-[#6F6F6F]">125 donations</p>
+                  <p className="text-[#6F6F6F]">{numberofdonators} donations</p>
                 </div>
               </div>
 
@@ -286,24 +305,29 @@ const Donation = () => {
                     cx="40"
                     cy="40"
                     strokeDasharray={2 * Math.PI * 36}
-                    strokeDashoffset={2 * Math.PI * 36 * (1 - 0.12)} // 12% progress
+                    strokeDashoffset={2 * Math.PI * 36 * (1 - percentageraised)} //
                     strokeLinecap="round"
                     transform="rotate(-90 40 40)"
                   />
                 </svg>
-                <span className="absolute text-lg ">12%</span>
+                <span className="absolute text-lg ">
+                  {percentageraised * 100}%
+                </span>
               </div>
             </div>
             <div className="flex flex-col gap-2 mt-4">
               <div
-                className="block cursor-pointer text-center rounded-2xl text-white greenbg font-bold py-3 px-2 "
+                className="block cursor-pointer text-center rounded-3xl text-white greenbg font-bold py-4 px-2 "
                 onClick={handleShare}
               >
                 Share now
               </div>
-              <div className="block cursor-pointer text-center rounded-2xl textgreen yellowbg font-bold py-3 px-2 ">
-                Donate now
+              <div className=" cta-button donate-btn">
+                <DonateNow />
               </div>
+              {/* <div className="block cursor-pointer text-center rounded-3xl  textgreen yellowbg font-bold py-4 px-2 ">
+                Donate now
+              </div> */}
             </div>
 
             {/* donators */}

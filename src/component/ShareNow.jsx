@@ -8,25 +8,24 @@ const ShareNow = () => {
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
+  // sharenow button
   const shareLink = window.location.href;
-  const subject = "Support Havesta's Agriculture Initiative";
-  const body = `Join me in supporting Havesta's mission to build Nigeria's agriculture future! ${shareLink}`;
-
-  const handleShare = (platform) => {
-    if (platform === "whatsapp") {
-      const url = `https://wa.me/?text=${encodeURIComponent(body)}`;
-      window.open(url, "_blank");
-    } else if (platform === "gmail") {
-      const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.open(mailto, "_blank");
-    }
+  const handleShare = () => {
+    const message = encodeURIComponent(
+      ` Havesta is currently crowdfunding to bring our MVP to life 🚀.\n\nWith your support, we can create a digital product that connects farmers directly to customers—making Fresh Farm Produce, Healthy Livestock, and other Agri-Inputs accessible to all while transforming agriculture in Nigeria.\n\nThis initiative has huge growth potential and we’re inviting you to be part of the early supporters who will make this vision possible.\n\n✨ Every donation makes a difference.\n\n📢 Please Donate today & help share this with your friends!\n\nCheck it out here: ${shareLink}`
+    );
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+    window.open(whatsappUrl, "_blank");
     handleClose(); // Close modal after sharing
   };
 
   return (
     <>
       {/* Trigger Button */}
-      <button className="cta-button share-btn" onClick={handleOpen}>
+      <button
+        className="w-full cursor-pointer text-center rounded-3xl  textgreen bg-white font-bold py-4 px-2 "
+        onClick={handleOpen}
+      >
         Share To Others
       </button>
 
@@ -53,9 +52,6 @@ const ShareNow = () => {
                 Gmail
               </button>
             </div>
-            <button className="cancel-btn" onClick={handleClose}>
-              Close
-            </button>
           </div>
         </div>
       )}
