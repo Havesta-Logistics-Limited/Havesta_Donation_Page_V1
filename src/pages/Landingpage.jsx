@@ -8,7 +8,6 @@ const Landingpage = () => {
   return (
     <div>
       <MainPage />
-      {/* <Maincontent /> */}
       <Donation />
       <Footer />
     </div>
