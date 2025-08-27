@@ -255,12 +255,8 @@ const Donation = () => {
 
             <div className="like flex items-center mt-3 gap-1">
               <img src={like} alt="" className="mr-2 cursor-pointer" />
-              <p>💚</p>
-              <p>🙏</p>
-              <p>💐</p>
-              <p>👏</p>
-              <p>✨</p>
-              <p className="underline">85</p>
+
+              <p className="underline">0</p>
             </div>
           </div>
         </div>
