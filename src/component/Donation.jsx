@@ -20,6 +20,7 @@ import ReactionButton from "./ReactionButton";
 // Styles and utilities
 import "./../css/Maincontent.css";
 import { getDonations } from "../lib/firebase/firebase";
+import { handleShare } from "../utils/helpers";
 
 // Constants
 const FUNDING_GOAL = 10000000; // ₦10M
@@ -421,21 +422,6 @@ const Donation = () => {
   const displayedDonators = showTopDonators
     ? [...donators].sort((a, b) => b.amount - a.amount).slice(0, 6) // top 6
     : donators.slice(0, 6); // recent 6
-
-  // Event handlers
-  const handleShare = () => {
-    const message = `Havesta is currently crowdfunding to bring our MVP to life 🚀.  
-With your support, we can create a digital product that connects farmers directly to customers—making Fresh Farm Produce, Healthy Livestock, and other Agri-Inputs accessible to all while transforming agriculture in Nigeria.  
-
-✨ Every donation makes a difference.  
-
-📢 Please Donate today & help share this with your friends!  
-
-Check it out here: https://havesta.com/donation`;
-
-    const whatsappUrl = createWhatsAppUrl("", message);
-    window.open(whatsappUrl, "_blank");
-  };
 
   const handleSpeakWithFounder = () => {
     const message = "Hello, I'd like to learn more about Havesta.";

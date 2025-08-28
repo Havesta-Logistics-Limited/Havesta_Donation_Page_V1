@@ -1,22 +1,12 @@
 // src/components/ShareNow.jsx
 import React, { useState } from "react";
 import "../css/ShareNow.css"; // ✅ Assumes ShareNow.css is in same folder
+import { handleShare } from "../utils/helpers";
 
 const ShareNow = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
-
-  // sharenow button
-  const shareLink = window.location.href;
-  const handleShare = () => {
-    const message = encodeURIComponent(
-      ` Havesta is currently crowdfunding to bring our MVP to life 🚀.\n\nWith your support, we can create a digital product that connects farmers directly to customers—making Fresh Farm Produce, Healthy Livestock, and other Agri-Inputs accessible to all while transforming agriculture in Nigeria.\n\nThis initiative has huge growth potential and we’re inviting you to be part of the early supporters who will make this vision possible.\n\n✨ Every donation makes a difference.\n\n📢 Please Donate today & help share this with your friends!\n\nCheck it out here: ${shareLink}`
-    );
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
-    window.open(whatsappUrl, "_blank");
-    handleClose(); // Close modal after sharing
-  };
 
   return (
     <>
