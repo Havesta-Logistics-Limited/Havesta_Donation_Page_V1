@@ -1,0 +1,8 @@
+services:
+  donate-app:
+    build: .
+    container_name: donate-app
+    restart: always
+    ports: 
+      - "4200:80"
+
