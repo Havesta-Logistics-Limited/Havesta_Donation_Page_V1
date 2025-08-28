@@ -403,7 +403,7 @@ const Donation = () => {
 
   // Custom hooks
   const { videoRef, isPlaying, handleVideoClick } = useVideoPlayer();
-  const { donators, loading, error } = useDonations();
+  const { donators, loading } = useDonations();
 
   // Calculated values
   const stats = {
