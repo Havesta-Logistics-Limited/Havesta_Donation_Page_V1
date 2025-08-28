@@ -277,9 +277,7 @@ const ProgressSection = ({
             <span className="font-normal ml-2">Raised</span>
           </h2>
           <div className="font-bold flex justify-between items-center text-sm sm:text-xs">
-            <span className="textgreen">
-              {formatCurrency(FUNDING_GOAL)} Goal
-            </span>
+            <span className="textgreen">10M Goal</span>
             <span className="text-[#6F6F6F] -mt-1">.</span>
             <span className="text-[#6F6F6F]">{numberOfDonators} donations</span>
           </div>
