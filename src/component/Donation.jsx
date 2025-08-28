@@ -257,7 +257,14 @@ const ProgressCircle = ({ percentage }) => (
   </div>
 );
 
-const ProgressSection = ({ stats, onShare, donators, loading }) => {
+const ProgressSection = ({
+  stats,
+  onShare,
+  donators,
+  loading,
+  onToggleTopDonators,
+  showTopDonators,
+}) => {
   const { totalAmountRaised, numberOfDonators, percentageRaised } = stats;
 
   return (
@@ -265,9 +272,9 @@ const ProgressSection = ({ stats, onShare, donators, loading }) => {
       {/* Progress Header */}
       <div className="flex justify-between items-center">
         <div className="w-[200px] flex flex-col gap-1 lg:w-[180px]">
-          <h2 className="text-[#232323] font-bold text-xl flex justify-between sm:text-lg">
+          <h2 className="text-[#232323] font-bold text-xl sm:text-lg">
             {formatCurrency(totalAmountRaised)}
-            <span className="font-normal pr-4">Raised</span>
+            <span className="font-normal ml-2">Raised</span>
           </h2>
           <div className="font-bold flex justify-between items-center text-sm sm:text-xs">
             <span className="textgreen">
@@ -296,8 +303,11 @@ const ProgressSection = ({ stats, onShare, donators, loading }) => {
 
       <DonatorList donators={donators} loading={loading} />
 
-      <button className="text-[#232323] font-bold text-lg border border-[#B7B7B6] w-full text-center py-3 rounded-3xl justify-center">
-        See Top Donators
+      <button
+        className="text-[#232323] font-bold text-lg border border-[#B7B7B6] w-full text-center py-3 rounded-3xl justify-center"
+        onClick={onToggleTopDonators}
+      >
+        {showTopDonators ? "See Recent Donators" : "See Top Donators"}
       </button>
     </div>
   );
@@ -389,6 +399,7 @@ const useDonations = () => {
 // Main Component
 const Donation = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showTopDonators, setShowTopDonators] = useState(false);
 
   // Custom hooks
   const { videoRef, isPlaying, handleVideoClick } = useVideoPlayer();
@@ -408,17 +419,19 @@ const Donation = () => {
     ),
   };
 
+  // Donators list logic
+  const displayedDonators = showTopDonators
+    ? [...donators].sort((a, b) => b.amount - a.amount).slice(0, 6) // top 6
+    : donators.slice(0, 6); // recent 6
+
   // Event handlers
   const handleShare = () => {
-    const message = `Havesta is currently crowdfunding to bring our MVP to life 🚀.
+    const message = `Havesta is currently crowdfunding to bring our MVP to life 🚀.  
+With your support, we can create a digital product that connects farmers directly to customers—making Fresh Farm Produce, Healthy Livestock, and other Agri-Inputs accessible to all while transforming agriculture in Nigeria.  
 
-With your support, we can create a digital product that connects farmers directly to customers—making Fresh Farm Produce, Healthy Livestock, and other Agri-Inputs accessible to all while transforming agriculture in Nigeria.
+✨ Every donation makes a difference.  
 
-This initiative has huge growth potential and we're inviting you to be part of the early supporters who will make this vision possible.
-
-✨ Every donation makes a difference.
-
-📢 Please Donate today & help share this with your friends!
+📢 Please Donate today & help share this with your friends!  
 
 Check it out here: https://your-link.com`;
 
@@ -433,6 +446,7 @@ Check it out here: https://your-link.com`;
   };
 
   const handleToggleExpanded = () => setIsExpanded(!isExpanded);
+  const handleToggleTopDonators = () => setShowTopDonators(!showTopDonators);
 
   return (
     <div className="bg-white flex flex-col items-center px-6 py-8 md:px-9 lg:px-11">
@@ -471,8 +485,10 @@ Check it out here: https://your-link.com`;
         <ProgressSection
           stats={stats}
           onShare={handleShare}
-          donators={donators.slice(0, 6)}
+          donators={displayedDonators}
           loading={loading}
+          onToggleTopDonators={handleToggleTopDonators}
+          showTopDonators={showTopDonators}
         />
       </div>
     </div>

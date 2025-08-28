@@ -5,7 +5,6 @@ import "../css/ShareNow.css"; // ✅ Assumes ShareNow.css is in same folder
 const ShareNow = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   // sharenow button
@@ -24,7 +23,7 @@ const ShareNow = () => {
       {/* Trigger Button */}
       <button
         className="w-full cursor-pointer text-center rounded-3xl  textgreen bg-white font-bold py-4 px-2 "
-        onClick={handleOpen}
+        onClick={handleShare}
       >
         Share To Others
       </button>
