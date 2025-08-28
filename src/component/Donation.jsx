@@ -341,7 +341,7 @@ const useVideoPlayer = () => {
     return () => {
       if (video) observer.unobserve(video);
     };
-  }, [isPlaying]);
+  }, []);
 
   return { videoRef, isPlaying, handleVideoClick };
 };
