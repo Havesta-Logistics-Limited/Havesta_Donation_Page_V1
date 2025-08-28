@@ -431,7 +431,7 @@ With your support, we can create a digital product that connects farmers directl
 
 📢 Please Donate today & help share this with your friends!  
 
-Check it out here: https://your-link.com`;
+Check it out here: https://havesta.com/donation`;
 
     const whatsappUrl = createWhatsAppUrl("", message);
     window.open(whatsappUrl, "_blank");
