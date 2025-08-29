@@ -3,7 +3,6 @@ import { FaPlay } from "react-icons/fa";
 
 // Assets imports
 import pitch from "../assets/PitchDeck-Havesta.pdf";
-import videopitch from "../assets/HavestaPitch.MOV";
 import rectangle1 from "../assets/Rectangle1.svg";
 import rectangle2 from "../assets/Rectangle2.svg";
 import rectangle3 from "../assets/Rectangle3.svg";
@@ -72,7 +71,10 @@ const VideoPlayer = ({ videoRef, isPlaying, onVideoClick, onSpeakClick }) => (
         controls={false}
         style={{ objectFit: "cover" }}
       >
-        <source src={videopitch} type="video/mp4" />
+        <source
+          src="https://res.cloudinary.com/dtc89xi2r/video/upload/v1756475215/Havesta_Pitch_1_rfsalp.mp4"
+          type="video/mp4"
+        />
         Your browser does not support the video tag.
       </video>
 
@@ -350,7 +352,7 @@ const useVideoPlayer = () => {
     return () => {
       if (video) observer.unobserve(video);
     };
-  }, [isPlaying]);
+  }, []);
 
   return { videoRef, isPlaying, handleVideoClick };
 };
