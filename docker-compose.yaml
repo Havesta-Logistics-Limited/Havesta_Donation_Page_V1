@@ -1,8 +1,7 @@
 services:
-  donate-app:
+  havesta-donation-frontend:
     build: .
-    container_name: donate-app
+    container_name: havesta-donation-frontend
     restart: always
     ports: 
       - "4200:80"
-

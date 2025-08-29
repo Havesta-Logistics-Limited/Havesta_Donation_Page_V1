@@ -1,6 +1,6 @@
 import React from "react";
 import havestaLogo from "../assets/logo.svg";
-import watermelon from "../assets/water-Melon.svg";
+import watermelon from "../assets/Water-Melon.svg";
 import bellPepper from "../assets/bellpepper.svg";
 import palmOil from "../assets/palmoil.svg";
 import chickenWings from "../assets/chicken.svg";
