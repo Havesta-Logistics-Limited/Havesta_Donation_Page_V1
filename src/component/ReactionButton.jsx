@@ -10,25 +10,15 @@ export default function ReactionButton() {
   // Get or create deviceId
   const deviceId = (() => {
     let id = localStorage.getItem("deviceId");
-
     if (!id) {
-      // Try randomUUID if available
-      if (window.crypto && typeof window.crypto.randomUUID === "function") {
-        id = crypto.randomUUID();
-      }
-
-      // Final fallback: timestamp + random
-      else {
-        id =
-          "device-" +
-          Date.now().toString(36) +
-          "-" +
-          Math.random().toString(36).substring(2, 10);
-      }
-
-      localStorage.setItem("deviceId", id);
+      id =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : "device_" +
+            Math.random().toString(36).substr(2, 9) +
+            "_" +
+            Date.now();
     }
-
     return id;
   })();
 
