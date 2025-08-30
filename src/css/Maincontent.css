@@ -1,0 +1,443 @@
+/* src/components/Maincontent.css */
+
+.main-content {
+  background-color: #004a2d;
+  color: white;
+  padding: 120px 120px;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 700px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Logo Container */
+.main-content .logo {
+  position: absolute;
+  top: 17px;
+  right: 605px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between text and image */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Logo Text (Havesta) */
+.main-content .logo-text {
+  font-size: 1.5rem;        /* ~24px */
+  font-weight: 700;         /* Bold */
+  color: white;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Logo Image */
+.main-content .logo img {
+  height: 36px;
+  width: auto;
+  cursor: pointer;
+}
+
+/* Hero Text */
+.main-content .hero-text {
+  max-width: 500px;
+  margin-bottom: 16px;  /* Reduced from 32px → 16px */
+  margin-top: 40px;     /* Keep this to keep the section lowered */
+}
+
+.main-content .hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.main-content .hero-text p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.9;
+  color: #e5e7eb;
+}
+
+/* CTA Buttons */
+.main-content .cta-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.main-content .cta-button {
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.main-content .donate-btn {
+  background-color: #FFC141;
+  color: #000;
+}
+
+.main-content .share-btn {
+  background-color: white;
+  color: #004a2d;
+  border: 1px solid #ffffff;
+}
+
+/* Products Grid */
+.main-content .products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 32px;
+}
+
+.main-content .product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.main-content .product-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.main-content .product-label {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.main-content .label-watermelon {
+  background-color: #CCF88E;
+  color: #273F2B;
+}
+
+.main-content .label-bell-pepper {
+  background-color: #ECCFF6;
+  color: #273F2B;
+}
+
+.main-content .label-palm-oil {
+  background-color: #A7E3E3;
+  color: #273F2B;
+}
+
+.main-content .label-chicken-wings {
+  background-color: #FFB2CE;
+  color: #273F2B;
+}
+
+.main-content .label-sweet-beans {
+  background-color: #E2BF88;
+  color: #273F2B;
+}
+
+.main-content .label-titus-fish {
+  background-color: #E2E2E2;
+  color: #273F2B;
+}
+
+.main-content .label-plantain {
+  background-color: #CCF3E5;
+  color: #273F2B;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .main-content {
+    padding: 60px 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    padding: 50px 30px;
+  }
+
+  .main-content .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .main-content .products-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 40px 20px;
+  }
+
+  .main-content .hero-text h1 {
+    font-size: 1.75rem;
+  }
+
+  .main-content .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main-content .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .main-content .logo {
+    top: 16px;
+    right: 16px;
+  }
+}
+/* Products Grid */
+.main-content .products-grid {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 40px;
+}
+
+/* Individual Product Items – Use Absolute Positioning */
+.main-content .product-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+/* Watermelon */
+.main-content .watermelon {
+  top: -400px;
+  left: 510px;
+}
+
+/* Bell Pepper */
+.main-content .bell-pepper {
+  top: -395px;
+  left: 675px;
+}
+
+/* Palm Oil */
+.main-content .palm-oil {
+  top: -400px;
+  left: 809px;
+}
+
+/* Chicken Wings */
+.main-content .chicken-wings {
+  top: -250px;
+  left: 638px;
+}
+
+/* Sweet Beans */
+.main-content .sweet-beans {
+  top: -248px;
+  left: 765px;
+}
+
+/* Titus Fish */
+.main-content .titus-fish {
+  top: -148px;
+  left: 560px;
+}
+
+/* Plantain */
+.main-content .plantain {
+  top: -145px;
+  left: 700px;
+}
+/* Watermelon */
+.main-content .watermelon img {
+  width: 100px;
+  height: 100px;
+}
+
+.main-content .watermelon .product-label {
+  padding: 3px 12px;
+  font-size: 14px;
+  top: -77px;
+    left: 99px;
+  z-index: 9;
+}
+
+/* Bell Pepper */
+.main-content .bell-pepper img {
+  width: 80px;
+  height: 80px;
+}
+
+.main-content .bell-pepper .product-label {
+  padding: 3px 12px;
+  font-size: 12px;
+  top: -57px;
+    left: 90px;
+  z-index: 9;
+}
+
+/* Palm Oil */
+.main-content .palm-oil img {
+  width: 99x;
+  height: 99px;
+}
+
+.main-content .palm-oil .product-label {
+  padding: 2px 11px;
+  font-size: 12px;
+  top: -66px;
+    left: 70px;
+  z-index: 5;
+}
+
+/* Chicken Wings */
+.main-content .chicken-wings img {
+  width: 95px;
+  height: 95px;
+}
+
+.main-content .chicken-wings .product-label {
+  padding: 2px 6px;
+  font-size: 13px;
+      top: -60px;
+    left: -10px;
+  z-index: 5;
+}
+
+/* Sweet Beans */
+.main-content .sweet-beans img {
+  width: 90px;
+  height: 90px;
+}
+
+.main-content .sweet-beans .product-label {
+  padding: 4px 16px;
+  font-size: 13px;
+    top: -60px;
+    left: 130px;
+  z-index: 9;
+}
+
+/* Titus Fish */
+.main-content .titus-fish img {
+  width: 85px;
+  height: 85px;
+}
+
+.main-content .titus-fish .product-label {
+  padding: 5px 14px;
+  font-size: 12px;
+  top: -60px;
+  left: 1px;
+  z-index: 9;
+}
+
+/* Plantain */
+.main-content .plantain img {
+  width: 120px;
+  height: 120px;
+}
+
+.main-content .plantain .product-label {
+  padding: 5px 13px;
+  font-size: 12px;
+  top: -70px;
+  left: 75px;
+  z-index: 12;
+}
+/* Floating Animation for Labels */
+.main-content .product-label {
+  animation: float 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%) translateY(0px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-6px) rotate(1deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0px) rotate(-1deg);
+  }
+}
+.main-content .watermelon .product-label {
+  animation-delay: 0s;
+}
+
+.main-content .bell-pepper .product-label {
+  animation-delay: 0.2s;
+}
+
+.main-content .palm-oil .product-label {
+  animation-delay: 0.4s;
+}
+
+.main-content .chicken-wings .product-label {
+  animation-delay: 0.6s;
+}
+
+.main-content .sweet-beans .product-label {
+  animation-delay: 0.8s;
+}
+
+.main-content .titus-fish .product-label {
+  animation-delay: 1.0s;
+}
+
+.main-content .plantain .product-label {
+  animation-delay: 1.2s;
+}
+
+/* Donate Now Button Hover */
+.main-content .donate-btn {
+  background-color: #fbbf24;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.main-content .donate-btn:hover {
+  background-color: #f59e0b;  /* Darker orange */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Share To Others Button Hover */
+.main-content .share-btn {
+  background-color: white;
+  color: #004a2d;
+  border: 1px solid #ffffff;
+  transition: all 0.3s ease;
+}
+
+.main-content .share-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
