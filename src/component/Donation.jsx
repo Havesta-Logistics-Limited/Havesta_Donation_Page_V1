@@ -7,7 +7,7 @@ import { handleShare } from "../utils/helpers";
 import { VideoPlayer } from "./VideoPlayer";
 import { ImageGallery } from "./ImageGallery";
 import { MissionStatement } from "./MissionStatement";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "../hooks/useVideoPlayer";
 import { useDonations } from "../hooks/useDonations";
 
 // Styles
@@ -66,7 +66,7 @@ const Donation = () => {
         HELP BRING OUR MVP TO LIVE BY DONATING
       </h1>
 
-      <div className="flex flex-col gap-8 items-center sm:grid sm:grid-cols-2 sm:items-start md:grid-cols-[360px_1fr] lg:grid-cols-[25%_40%_30%]">
+      <div className="flex flex-col gap-8 items-center sm:grid sm:grid-cols-2 sm:items-start md:grid-cols-[360px_1fr] lg:grid-cols-[25%_40%_30%] ">
         <VideoPlayer
           videoRef={videoRef}
           isPlaying={isPlaying}

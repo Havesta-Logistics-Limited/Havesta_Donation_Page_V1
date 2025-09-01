@@ -10,7 +10,7 @@ export const VideoPlayer = ({
   onSpeakClick,
 }) => (
   <div className="w-full sm:order-1 h-full sm:flex sm:flex-col sm:justify-center">
-    <div className="relative max-w-sm flex flex-col items-center justify-center w-full m-auto z-50">
+    <div className="relative max-w-sm flex flex-col items-center justify-center w-full m-auto z-50 lg:m-0">
       <video
         ref={videoRef}
         className="w-full max-w-3xl rounded-2xl shadow-lg cursor-pointer m-auto"
@@ -38,7 +38,7 @@ export const VideoPlayer = ({
     </div>
 
     <button
-      className="lightgreenbg text-[#273f2b] font-bold rounded-3xl py-5 flex items-center justify-center text-center gap-2 w-[80%] px-2 m-auto mt-4 cursor-pointer sm:text-sm lg:w-[80%]"
+      className="lightgreenbg text-[#273f2b] font-bold rounded-3xl py-5 flex items-center justify-center text-center gap-2 w-[80%] px-2 m-auto mt-4 cursor-pointer sm:text-sm lg:w-[90%] lg:gap-1 lg:text-xs xl:text-sm xl:gap-2"
       onClick={onSpeakClick}
     >
       <img src={whatsapp} alt="WhatsApp" className="w-7 sm:w-6" />
